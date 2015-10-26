@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+	<title>Clock</title>
+	<head>
+		<script src="https://code.jquery.com/jquery-2.1.4.js"></script>
+	</head>
+	<body>
+		<div id="clock"></div>
+		<script>
+		
+			$(document).ready(function(){
+
+				function getTime() {
+					
+					var date = new Date();
+					var h = date.getHours();
+					var m = date.getMinutes();
+					var s = date.getSeconds();
+					var ms = date.getMilliseconds();
+
+					h = noMilitaryTime(h);
+					h = formatValue(h);
+
+					// format m and s correctly
+					m = formatValue(m);
+					s = formatValue(s);
+
+					changeColor(m);
+					changeSize(m);
+					colorChangeAgain(m);
+
+
+					$("#clock").html(h + ":" + m + ":" + s + ":" + ms);
+
+					setTimeout(getTime, 1000);
+					
+				};
+
+				function noMilitaryTime(value) {
+					if (value > 12) {
+						return value - 12;
+						} else {
+						return value;
+						}
+				};
+
+				function formatValue(value)	{
+					if (value < 10) {
+						return "0" + value;
+					} else{
+					return value;
+					}
+				};
+
+				getTime();
+
+				function changeColor(value) {
+					if (value % 2 !== 0) {
+						return $("body").css("background-color", "green");
+					} else {
+						return $("body").css("background-color", "lightblue");
+					}
+				};
+
+				function changeSize(value) {
+					if (value % 5 === 0) {
+						return $("body").css("font-size", "36px");
+					} else {
+						return $("body").css("font-size", "72px");				
+					}
+
+					setTimeout(changeSize, 50000)
+				};
+
+				
+				function colorChangeAgain(value){
+					if (value === "00") {
+						return $("body").css("color", "blue");
+					} else {
+						return $("body").css("color", "purple");
+					}
+
+					setInterval(colorChangeAgain, 600000);
+
+				};
+
+			});
+
+		</script>
+	</body>
+</html>
