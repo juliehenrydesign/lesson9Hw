@@ -6,17 +6,14 @@
 	</head>
 	<body>
 		<div id="clock"></div>
-		<script>
 		
+		<script>
 			$(document).ready(function(){
-
 				function getTime() {
-					
 					var date = new Date();
 					var h = date.getHours();
 					var m = date.getMinutes();
 					var s = date.getSeconds();
-					var ms = date.getMilliseconds();
 
 					h = noMilitaryTime(h);
 					h = formatValue(h);
@@ -30,7 +27,7 @@
 					colorChangeAgain(m);
 
 
-					$("#clock").html(h + ":" + m + ":" + s + ":" + ms);
+					$("#clock").html(h + ":" + m + ":" + s );
 
 					setTimeout(getTime, 1000);
 					
@@ -62,6 +59,7 @@
 					}
 				};
 
+
 				function changeSize(value) {
 					if (value % 5 === 0) {
 						return $("body").css("font-size", "36px");
@@ -69,10 +67,11 @@
 						return $("body").css("font-size", "72px");				
 					}
 
-					setTimeout(changeSize, 50000)
+					setTimeout(changeSize, 3000)
 				};
 
-				
+				changeSize();
+
 				function colorChangeAgain(value){
 					if (value === "00") {
 						return $("body").css("color", "blue");
@@ -80,9 +79,11 @@
 						return $("body").css("color", "purple");
 					}
 
-					setInterval(colorChangeAgain, 600000);
+					setInterval(colorChangeAgain, 10000);
 
 				};
+					colorChangeAgain();
+
 
 			});
 
